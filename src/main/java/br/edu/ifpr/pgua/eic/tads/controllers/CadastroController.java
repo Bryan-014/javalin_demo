@@ -15,25 +15,20 @@ public class CadastroController {
     public CadastroController(Cadastro cadastro){
         this.cadastro = cadastro;
     }
-    
-    public Handler get = (Context ctx)->{
+    public Handler get = (Context ctx) -> {
         ctx.render("cadastro.html");
     };
 
-    public Handler post = (Context ctx)->{
+    public Handler post = (Context ctx) -> {
         String nome = ctx.formParam("nome");
-        String cpf = ctx.formParam("cpf");
+        String email = ctx.formParam("email");
+        String telefone = ctx.formParam("telefone");
 
-        cadastro.add(new Pessoa(nome, cpf));
+        cadastro.add(new Pessoa(nome, email, telefone));
 
-        Map<String,Object> dados = new HashMap<>();
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("mensagem", "Cadastro realizado!");
 
-        dados.put("pessoas",cadastro.getPessoas());
-        
-        ctx.render("resposta.html",dados);
-
+        ctx.render("cadastro.html", dados);
     };
-
-
-
 }
